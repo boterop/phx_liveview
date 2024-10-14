@@ -4,6 +4,8 @@ WORKDIR /usr/src/app
 
 ENV MIX_ENV=dev
 
+RUN apt-get update && apt-get install -y inotify-tools
+
 COPY mix.exs ./
 
 RUN mix local.hex --force
