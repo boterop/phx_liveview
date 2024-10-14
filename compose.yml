@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=phx_liveview_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+  phx_liveview:
+    build: .
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/usr/src/app
+    env_file:
+      - .env
+    environment:
+      - MIX_ENV=dev
+      - PORT=4000
+    depends_on:
+      - db
+volumes:
+  deps:
+  build:
+  db:
