@@ -30,7 +30,7 @@ defmodule PhxLiveview.MixProject do
   def application do
     [
       mod: {PhxLiveview.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :os_mon]
     ]
   end
 

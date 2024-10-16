@@ -18,7 +18,8 @@ defmodule PhxLiveviewWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
-    live "/login", LoginLive.Index, :index
+    live "/login", Live.Login.Index, :index
+    live "/register", Live.Register.Index, :index
   end
 
   # Other scopes may use custom stacks.

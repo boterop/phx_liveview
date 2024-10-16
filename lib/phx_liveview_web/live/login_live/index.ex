@@ -1,4 +1,4 @@
-defmodule PhxLiveviewWeb.LoginLive.Index do
+defmodule PhxLiveviewWeb.Live.Login.Index do
   use PhxLiveviewWeb, :live_view
 
   alias PhxLiveview.Account
@@ -10,9 +10,15 @@ defmodule PhxLiveviewWeb.LoginLive.Index do
 
   @impl true
   def handle_event("login", %{"email" => email, "password" => password}, socket) do
-    with %{password: hash} = user <- Account.get_user_by_email!(email),
-         true <- Bcrypt.verify_pass(password, hash) do
-      {:noreply, assign(socket, current_user: user)}
+    with %{id: id, password: hash} <- Account.get_user_by_email!(email),
+         true <- Bcrypt.verify_pass(password, hash),
+         token <- Phoenix.Token.sign(PhxLiveviewWeb.Endpoint, System.get_env("JWT_SECRET"), id) do
+      new_socket =
+        socket
+        |> assign(:current_user, token)
+        |> push_navigate(to: "/")
+
+      {:noreply, new_socket}
     else
       _ ->
         {:noreply, assign(socket, error: "Invalid email or password")}
