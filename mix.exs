@@ -5,7 +5,7 @@ defmodule PhxLiveview.MixProject do
     [
       app: :phx_liveview,
       version: "0.1.0",
-      elixir: "~> 1.14",
+      elixir: "~> 1.17.3",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),

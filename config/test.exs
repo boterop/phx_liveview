@@ -9,7 +9,7 @@ config :phx_liveview, PhxLiveview.Repo,
   username: System.get_env("DB_USER"),
   password: System.get_env("DB_PASSWORD"),
   hostname: System.get_env("DB_HOST"),
-  database: System.get_env("DB_NAME"),
+  database: "#{System.get_env("DB_NAME")}_test",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: System.schedulers_online() * 2
 
