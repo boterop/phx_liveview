@@ -17,4 +17,4 @@ COPY . .
 RUN mix do phx.digest, compile 
 
 EXPOSE 4000
-CMD ["mix", "phx.server"]
+CMD ["mix", "start"]

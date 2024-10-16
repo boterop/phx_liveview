@@ -72,6 +72,7 @@ defmodule PhxLiveview.MixProject do
       {:bandit, "~> 1.5"},
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:bcrypt_elixir, "~> 3.2"},
       {:excoveralls, "~> 0.18.1", only: :test}
     ]
   end
@@ -84,6 +85,7 @@ defmodule PhxLiveview.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
+      start: ["ecto.create", "ecto.migrate", "phx.server"],
       setup: ["deps.get", "ecto.setup", "assets.setup", "assets.build"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
