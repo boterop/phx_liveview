@@ -73,6 +73,7 @@ defmodule PhxLiveview.MixProject do
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:bcrypt_elixir, "~> 3.2"},
+      {:guardian, "~> 2.3"},
       {:excoveralls, "~> 0.18.1", only: :test}
     ]
   end

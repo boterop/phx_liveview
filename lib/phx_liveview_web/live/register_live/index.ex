@@ -32,4 +32,9 @@ defmodule PhxLiveviewWeb.Live.Register.Index do
         {:noreply, assign(socket, error: error)}
     end
   end
+
+  @impl true
+  def handle_event("login", _, socket) do
+    {:noreply, push_navigate(socket, to: "/login")}
+  end
 end

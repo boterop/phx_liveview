@@ -24,4 +24,9 @@ defmodule PhxLiveviewWeb.Live.Login.Index do
         {:noreply, assign(socket, error: "Invalid email or password")}
     end
   end
+
+  @impl true
+  def handle_event("register", _, socket) do
+    {:noreply, push_navigate(socket, to: "/register")}
+  end
 end

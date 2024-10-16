@@ -1,6 +1,8 @@
 defmodule PhxLiveviewWeb.Router do
   use PhxLiveviewWeb, :router
 
+  alias PhxLiveviewWeb.Pipeline
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -12,6 +14,10 @@ defmodule PhxLiveviewWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+  end
+
+  pipeline :auth do
+    plug Pipeline.Auth
   end
 
   scope "/", PhxLiveviewWeb do
