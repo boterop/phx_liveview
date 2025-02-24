@@ -1,4 +1,8 @@
 defmodule PhxLiveviewWeb.Live.Register.Index do
+  @moduledoc """
+    Register LiveView
+  """
+
   use PhxLiveviewWeb, :live_view
 
   alias PhxLiveview.{Account, Account.User}
