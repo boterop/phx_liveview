@@ -4,6 +4,8 @@ WORKDIR /usr/src/app
 
 ENV MIX_ENV=dev
 
+RUN apt-get update && apt-get install -y inotify-tools
+
 COPY mix.exs ./
 
 RUN mix local.hex --force
@@ -15,4 +17,4 @@ COPY . .
 RUN mix do phx.digest, compile 
 
 EXPOSE 4000
-CMD ["mix", "phx.server"]
+CMD ["mix", "start"]

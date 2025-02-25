@@ -1,6 +1,8 @@
 defmodule PhxLiveviewWeb.Router do
   use PhxLiveviewWeb, :router
 
+  alias PhxLiveviewWeb.Pipeline
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -14,10 +16,16 @@ defmodule PhxLiveviewWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug Pipeline.Auth
+  end
+
   scope "/", PhxLiveviewWeb do
     pipe_through :browser
 
     get "/", PageController, :home
+    live "/login", Live.Login.Index, :index
+    live "/register", Live.Register.Index, :index
   end
 
   # Other scopes may use custom stacks.

@@ -11,6 +11,10 @@ config :phx_liveview,
   ecto_repos: [PhxLiveview.Repo],
   generators: [timestamp_type: :utc_datetime]
 
+config :phx_liveview, PhxLiveview.Guardian,
+  issuer: "phx_liveview",
+  secret_key: System.get_env("JWT_SECRET")
+
 # Configures the endpoint
 config :phx_liveview, PhxLiveviewWeb.Endpoint,
   url: [host: "localhost"],

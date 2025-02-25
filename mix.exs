@@ -5,11 +5,22 @@ defmodule PhxLiveview.MixProject do
     [
       app: :phx_liveview,
       version: "0.1.0",
-      elixir: "~> 1.14",
+      elixir: "~> 1.17.3",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      dialyzer: [
+        plt_add_apps: [:products, :ex_unit, :jason],
+        plt_file: {:no_warn, "priv/plts/dialyzer.plt"}
+      ],
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
@@ -19,7 +30,7 @@ defmodule PhxLiveview.MixProject do
   def application do
     [
       mod: {PhxLiveview.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :os_mon]
     ]
   end
 
@@ -58,7 +69,12 @@ defmodule PhxLiveview.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:bcrypt_elixir, "~> 3.2"},
+      {:guardian, "~> 2.3"},
+      {:excoveralls, "~> 0.18.1", only: :test}
     ]
   end
 
@@ -70,6 +86,7 @@ defmodule PhxLiveview.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
+      start: ["ecto.create", "ecto.migrate", "phx.server"],
       setup: ["deps.get", "ecto.setup", "assets.setup", "assets.build"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
