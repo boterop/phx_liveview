@@ -110,5 +110,5 @@ jobs:
         env:
           DB_USER: postgres
           DB_PASSWORD: postgres
-          DB_HOST: postgres
+          DB_HOST: localhost:5432
           DB_NAME: postgres
