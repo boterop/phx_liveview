@@ -111,4 +111,4 @@ jobs:
           DB_USER: postgres
           DB_PASSWORD: postgres
           DB_HOST: postgres
-          DB_NAME: postgres_test
+          DB_NAME: postgres
