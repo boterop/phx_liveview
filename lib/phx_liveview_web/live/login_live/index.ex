@@ -1,4 +1,8 @@
 defmodule PhxLiveviewWeb.Live.Login.Index do
+  @moduledoc """
+    Login LiveView
+  """
+
   use PhxLiveviewWeb, :live_view
 
   alias PhxLiveview.Account
