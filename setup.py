@@ -24,7 +24,7 @@ ignored = open(".gitignore").read().splitlines()
 ignored = [i.strip() for i in ignored if i.strip() != ""]
 ignored = [i for i in ignored if i[0] != "#" or i[0] != "!"]
 ignored = [i[1:] for i in ignored if i[0] == "/"]
-ignored.append("setup.py")
+ignored.extend((".git", "setup.py"))
 
 
 def rename_file(dirs, path):
@@ -34,10 +34,10 @@ def rename_file(dirs, path):
             should_ignore = len([i for i in ignored if absolute_path in i]) > 0
             if should_ignore:
                 continue
-            if os.path.isdir(file):
-                rename_file(os.listdir(file), absolute_path)
+            if os.path.isdir(absolute_path):
+                rename_file(os.listdir(absolute_path), absolute_path)
 
-            if os.path.isfile(file):
+            if os.path.isfile(absolute_path):
                 rename_content(absolute_path)
 
             if original_name in file:
