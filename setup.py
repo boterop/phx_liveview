@@ -14,28 +14,27 @@ ignored = [i.strip() for i in ignored if i.strip() != ""]
 ignored = [i for i in ignored if i[0] != "#" or i[0] != "!"]
 ignored = [i[1:] for i in ignored if i[0] == "/"]
 
-print(ignored)
-
 
 def rename_file(dirs, path):
     for file in dirs:
         absolute_path = os.path.join(path, file)
-        should_ignore = len([i for i in ignored if absolute_path in i]) > 0
-        if should_ignore:
-            print(f"Ignoring {absolute_path}")
-            continue
-        if os.path.isdir(file):
-            rename_file(os.listdir(file), absolute_path)
+        try:
+            should_ignore = len([i for i in ignored if absolute_path in i]) > 0
+            if should_ignore:
+                continue
+            if os.path.isdir(file):
+                rename_file(os.listdir(file), absolute_path)
 
-        if original_name in file:
-            print(f"Renaming {absolute_path} to {file.replace(original_name, name)}")
-            # os.rename(absolute_path, file.replace(original_name, name))
+            if original_name in file:
+                os.rename(absolute_path, absolute_path.replace(original_name, name))
 
-        if capitalized_original_name in file:
-            print(
-                f"Renaming {absolute_path} to {file.replace(capitalized_original_name, capitalized_name)}"
-            )
-            # os.rename(absolute_path, file.replace(capitalized_original_name, capitalized_name))
+            if capitalized_original_name in file:
+                os.rename(
+                    absolute_path,
+                    absolute_path.replace(capitalized_original_name, capitalized_name),
+                )
+        except Exception as e:
+            print(f"Error renaming {absolute_path}: {e}")
 
 
 rename_file(dirs, root)
