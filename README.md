@@ -15,6 +15,10 @@ To start your Phoenix server:
   SECRET_KEY=test-secret-key
   ```
 
+## After template setup
+
+- Run `python3 setup.py` to rename the project
+
 ## With docker
 
 ```sh
