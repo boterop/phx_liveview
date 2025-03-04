@@ -22,8 +22,10 @@ capitalized_name = capitalize(name.replace("_", " ")).replace(" ", "")
 
 ignored = open(".gitignore").read().splitlines()
 ignored = [i.strip() for i in ignored if i.strip() != ""]
-ignored = [i for i in ignored if i[0] != "#" or i[0] != "!"]
-ignored = [i[1:] for i in ignored if i[0] == "/"]
+ignored = [i for i in ignored if i[0] not in ["#", "!"]]
+ignored = map(lambda i: i if i[0] != "/" else i[1:], ignored)
+ignored = map(lambda i: i if i[-1] != "/" else i[:-1], ignored)
+ignored = list(ignored)
 ignored.extend((".git", ".elixir_ls", "setup.py"))
 
 
@@ -35,7 +37,7 @@ def rename_file(dirs, path):
     for file in dirs:
         absolute_path = os.path.join(path, file)
         try:
-            should_ignore = len([i for i in ignored if absolute_path in i]) > 0
+            should_ignore = len([i for i in ignored if absolute_path == i]) > 0
             if should_ignore:
                 continue
             if os.path.isdir(absolute_path):
