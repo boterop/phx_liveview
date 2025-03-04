@@ -17,7 +17,12 @@ capitalized_original_name = capitalize(original_name.replace("_", " ")).replace(
 root = ""
 dirs = os.listdir(".")
 
-name = input("New project name (e.g. phx_liveview): ").strip().replace(" ", "_").lower()
+name = (
+    input(f"New project name (e.g. {original_name}): ")
+    .strip()
+    .replace(" ", "_")
+    .lower()
+)
 capitalized_name = capitalize(name.replace("_", " ")).replace(" ", "")
 
 ignored = open(".gitignore").read().splitlines()
