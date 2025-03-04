@@ -27,6 +27,10 @@ ignored = [i[1:] for i in ignored if i[0] == "/"]
 ignored.extend((".git", ".elixir_ls", "setup.py"))
 
 
+def rename(path, original, new):
+    os.rename(path, path.replace(original, new))
+
+
 def rename_file(dirs, path):
     for file in dirs:
         absolute_path = os.path.join(path, file)
@@ -41,13 +45,10 @@ def rename_file(dirs, path):
                 rename_content(absolute_path)
 
             if original_name in file:
-                os.rename(absolute_path, absolute_path.replace(original_name, name))
+                rename(absolute_path, original_name, name)
 
             if capitalized_original_name in file:
-                os.rename(
-                    absolute_path,
-                    absolute_path.replace(capitalized_original_name, capitalized_name),
-                )
+                rename(absolute_path, capitalized_original_name, capitalized_name)
         except Exception as e:
             print(f"Error renaming {absolute_path}: {e}")
 
