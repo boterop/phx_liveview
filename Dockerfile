@@ -21,7 +21,7 @@ RUN mix do assets.deploy, phx.digest, compile
 
 EXPOSE 4000
 RUN if [ "$MIX_ENV" = "prod" ]; then mix do phx.gen.release, release; fi
-CMD ["mix", "start"]
+CMD ["mix", "do", "deps.get,", "start"]
 
 FROM elixir:${ELIXIR_VERSION} AS runner
 WORKDIR /app
@@ -34,4 +34,4 @@ COPY --from=builder /app/_build/prod/rel/${APP_NAME} ./
 
 USER nobody
 
-CMD ["/app/bin/server"]
+CMD ["sh", "-c", "/app/bin/migrate && /app/bin/server"]
