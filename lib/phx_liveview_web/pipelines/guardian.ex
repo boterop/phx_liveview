@@ -5,7 +5,7 @@ defmodule PhxLiveviewWeb.Pipeline.Guardian do
 
   use Guardian, otp_app: :my_app
 
-  alias PhxLiveview.Account
+  alias PhxLiveview.Accounts
 
   def subject_for_token(%{id: id}, _claims) do
     # You can use any value for the subject of your token but
@@ -23,7 +23,7 @@ defmodule PhxLiveviewWeb.Pipeline.Guardian do
     # Here we'll look up our resource from the claims, the subject can be
     # found in the `"sub"` key. In above `subject_for_token/2` we returned
     # the resource id so here we'll rely on that to look it up.
-    resource = Account.get_user!(id)
+    resource = Accounts.get_user!(id)
     {:ok, resource}
   end
 
