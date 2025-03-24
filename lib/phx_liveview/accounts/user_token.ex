@@ -1,4 +1,8 @@
 defmodule PhxLiveview.Accounts.UserToken do
+  @moduledoc """
+  The UserToken context.
+  """
+
   use Ecto.Schema
   import Ecto.Query
   alias PhxLiveview.Accounts.UserToken

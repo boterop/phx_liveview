@@ -6,7 +6,7 @@ defmodule PhxLiveview.Accounts do
   import Ecto.Query, warn: false
   alias PhxLiveview.Repo
 
-  alias PhxLiveview.Accounts.{User, UserToken, UserNotifier}
+  alias PhxLiveview.Accounts.{User, UserNotifier, UserToken}
 
   ## Database getters
 

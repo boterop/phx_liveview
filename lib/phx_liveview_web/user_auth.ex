@@ -1,4 +1,8 @@
 defmodule PhxLiveviewWeb.UserAuth do
+  @moduledoc """
+  The UserAuth module provides functions for authenticating users.
+  """
+
   use PhxLiveviewWeb, :verified_routes
 
   import Plug.Conn
