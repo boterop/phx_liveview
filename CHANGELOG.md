@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0 (07.05.2025)
+
+- Use phoenix auth system
+- Install psql extras
+
 ## 0.3.0 (22.03.2025)
 
 - Home as liveview
